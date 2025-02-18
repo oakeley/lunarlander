@@ -6,8 +6,7 @@ and outputs Q-values for each possible action. The ReLU activation functions hel
 introduce non-linearity, allowing the network to learn complex relationships between
 states and actions.
 
-1. Neural Network Architecture (DQN class):
-
+## 1. Neural Network Architecture (DQN class):
 ----------------------
 
 class DQN(nn.Module):
@@ -24,30 +23,27 @@ nn.Linear(64, output_size)
 
 ----------------------
 
-# Next we need to learn from experience so we set up an Experience Replay Buffer...
+Next we need to learn from experience so we set up an Experience Replay Buffer...
 
-2. Experience Replay Buffer:
-
+## 2. Experience Replay Buffer:
 ----------------------
 
 class ReplayBuffer:
+
 def __init__(self, capacity):
+
 self.Buffer = deque(maxlen=capacity)
 
 ----------------------
 
-The replay Buffer stores experiences (state, action, reward, next_state, done) and allows
-the agent to learn from past experiences. This is crucial because:
+The replay Buffer stores experiences (state, action, reward, next_state, done) and allows the agent to learn from past experiences. This is crucial because:
 
 It breaks the correlation between consecutive samplesIt allows the agent to reuse important experiences multiple times
 
 It helps prevent forgetting previous experiences while learning new ones
 
-3. DQL Agent Implementation: The agent uses several key reinforcement learning
-concepts:
-
-a) Epsilon-greedy exploration:
-
+## 3. DQL Agent Implementation: The agent uses several key reinforcement learning concepts:
+### a) Epsilon-greedy exploration:
 Ilja explained this briefly but I didn’t understand his explanation so I looked it up.
 Basically imagine you have two choices... you can either always pick something like the
 best decision seen so far or you can do something randomly di erent. Imagine you have
@@ -63,9 +59,14 @@ will always explore a bit.
 ----------------------
 
 def act(self, state):
+
 if random.random() < self.epsilon:
+
 return random.randrange(self.action_size)
-# else choose best action...
+
+else 
+
+ choose best action...
 
 ----------------------
 
@@ -74,8 +75,7 @@ Early on, high epsilon means more random actions (exploration)
 As epsilon decays, the agent increasingly chooses actions based on learned Q-
 values (exploitation)
 
-b) Two networks (policy and target):
-
+### b) Two networks (policy and target):
 ----------------------
 
 self.policy_net = DQN(state_size, action_size)
@@ -88,8 +88,7 @@ Using two networks helps stabilize training:The policy network is updated freque
 The target network is updated less frequently (every 10 episodes)
 This prevents the Q-values from chasing a moving target
 
-c) Q-learning update:
-
+### c) Q-learning update:
 ----------------------
 
 current_q_values = self.policy_net(state).gather(1, action.unsqueeze(1))
@@ -105,8 +104,7 @@ Current Q-values are predicted by the policy network
 Target Q-values are calculated using the Bellman equation
 The gamma parameter (0.99) determines how much future rewards are valued
 
-4. Training Loop:
-
+## 4. Training Loop:
 ----------------------
 
 def train_agent():
@@ -115,21 +113,32 @@ target_update_frequency = 10
 
 ----------------------
 
-The training process:
-
+### The training process:
 Runs for up to 1000 episodes
+
 Updates the target network every 10 episodes
+
 Stops early if the agent achieves a reward of 200 or higher
+
 Uses the gym.wrappers.Monitor to record videos of the agent's performance
+
 The combination of these elements helps the agent learn to:
-Control the lunar lander's thrusters e ectively
+
+Control the lunar lander's thrusters effectively
+
 Balance fuel consumption with safe landing
-Adapt to di erent initial conditions
+
+Adapt to different initial conditions
+
 Learn from both successes and failures through experience replay
-The success criteria (reward >= 200) indicates that the agent has learned to land safely
-and e iciently, considering factors like:
+
+The success criteria (reward >= 200) indicates that the agent has learned to land safely and efficiently, considering factors like:
+
 Landing pad alignment
+
 Smooth descent
+
 Minimal fuel usage
+
 Avoiding crashes
 
