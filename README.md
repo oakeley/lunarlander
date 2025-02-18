@@ -42,7 +42,7 @@ This repository contains an implementation of the Advantage Actor-Critic (A2C) a
 
 To train the agent:
 ```bash
-python lunar-lander-a2c.py
+python a2c-epsilon_lander.py
 ```
 
 Alternatively, try this one which is based on an A2C script from Deep-Reinforcement-Learning-Hands-On-Third-Edition. It is not as good as the DQN option but homework is homework...
