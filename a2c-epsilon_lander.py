@@ -142,7 +142,7 @@ def train_agent():
         subprocess.check_call([sys.executable, "-m", "pip", "install", "moviepy"])
         
     # Set up video directory
-    video_dir = '/home/edward/Videos/'
+    video_dir = '~/Videos/'
     if not os.path.exists(video_dir):
         os.makedirs(video_dir)
         
