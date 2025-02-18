@@ -6,6 +6,10 @@ and outputs Q-values for each possible action. The ReLU activation functions hel
 introduce non-linearity, allowing the network to learn complex relationships between
 states and actions.
 
+The DQN version is here: https://github.com/oakeley/lunarlander/blob/main/dqn_epsilon_lander.py
+
+For the homework, it was suggested that we update to use A2C which you can find in https://github.com/oakeley/lunarlander/blob/main/a2c-epsilon_lander.py
+
 ## 1. Neural Network Architecture (DQN class):
 ----------------------
 
