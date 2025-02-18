@@ -104,7 +104,7 @@ class DQLAgent:
 
 # Training loop
 def train_agent():
-    video_dir = '/mnt/c/Users/edwar/Videos/'
+    video_dir = '~/Videos/'
     env = gym.make('LunarLander-v2')
     env = gym.wrappers.Monitor(env, video_dir, force=True, video_callable=lambda episode_id: True)
     state_size = env.observation_space.shape[0]
